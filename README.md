@@ -28,7 +28,7 @@ On every push to `main`, [.github/workflows/pages.yml](.github/workflows/pages.y
 2. **Settings → Pages → Build and deployment**: set **Source** to **GitHub Actions** (not “Deploy from a branch”).
 3. Open the **Actions** tab and confirm the workflow succeeds. Your site URL appears in the workflow run and under Pages settings.
 
-`vite.config.js` sets `base` automatically in CI: `/` for a `username.github.io` repo, otherwise `/<repo-name>/` for project sites so assets load on `https://username.github.io/repo-name/`. A **custom domain** at the site root still works with that build.
+`vite.config.js` uses **`base: './'`** for production builds so asset URLs are **relative**. The same `dist/` works on a **custom domain** (site at `/`) and on **`username.github.io/repo-name/`** without a separate build per host.
 
 ### Other hosts
 
