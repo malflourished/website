@@ -20,9 +20,20 @@ npm run preview    # preview the build locally
 
 The `dist/` folder is a fully static site. Drop it on any static host:
 
-- **GitHub Pages**: push `dist/` to the `gh-pages` branch, or use the Pages UI to deploy from a folder.
-- **Netlify**: connect the repo → set build command to `npm run build`, publish directory to `dist`.
-- **Cloudflare Pages**: same as Netlify; build command `npm run build`, output `dist`.
+### GitHub Pages (this repo)
+
+On every push to `main`, [.github/workflows/pages.yml](.github/workflows/pages.yml) runs `npm ci` + `npm run build` and deploys `dist/` via GitHub Actions.
+
+1. Push this repo to GitHub.
+2. **Settings → Pages → Build and deployment**: set **Source** to **GitHub Actions** (not “Deploy from a branch”).
+3. Open the **Actions** tab and confirm the workflow succeeds. Your site URL appears in the workflow run and under Pages settings.
+
+`vite.config.js` sets `base` automatically in CI: `/` for a `username.github.io` repo, otherwise `/<repo-name>/` for project sites so assets load on `https://username.github.io/repo-name/`. A **custom domain** at the site root still works with that build.
+
+### Other hosts
+
+- **Netlify**: build `npm run build`, publish `dist`.
+- **Cloudflare Pages**: same.
 
 ## Project structure
 
