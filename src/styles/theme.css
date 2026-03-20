@@ -26,10 +26,10 @@
   --gap:         2rem;
   --radius:      2px;
 
-  /* Type */
-  --font-ui:      'Barlow Condensed', 'Arial Narrow', sans-serif;
-  --font-display: 'Playfair Display', Georgia, serif;
-  --font-mono:    'SF Mono', 'Fira Code', monospace;
+  /* Type — Departure Mono site-wide (pixel font; sizes use 11px grid where it matters) */
+  --font-ui:      'Departure Mono', ui-monospace, monospace;
+  --font-display: 'Departure Mono', ui-monospace, monospace;
+  --font-mono:    'Departure Mono', ui-monospace, monospace;
 }
 
 /* ── Reset / base ───────────────────────────────────────── */

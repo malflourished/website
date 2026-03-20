@@ -70,3 +70,7 @@ All memory entries live in `src/data/memories.json`. Each entry:
 
 - **Colors / type**: CSS variables in `src/styles/theme.css`.
 - **3D scene**: constants at the top of `src/scene/memorySkyline.js` (rain count, fog distance, drift speed, palettes).
+
+## Fonts
+
+The site uses **[Departure Mono](https://github.com/rektdeckard/departure-mono)** (v1.500) as the main typeface. Font files live in `src/assets/fonts/`; license: `src/assets/fonts/LICENSE.txt` (SIL Open Font License).

@@ -1,0 +1,12 @@
+/* Departure Mono — SIL Open Font License, see src/assets/fonts/LICENSE.txt
+   https://github.com/rektdeckard/departure-mono */
+
+@font-face {
+  font-family: 'Departure Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src:
+    url('../assets/fonts/DepartureMono-1.500.woff2') format('woff2'),
+    url('../assets/fonts/DepartureMono-1.500.woff') format('woff');
+}

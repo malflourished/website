@@ -89,6 +89,24 @@ function buildCityBlocks() {
   scene.add(mesh);
 }
 
+function makeRainDropTexture() {
+  // Points sprites are square; a 10×10 texture with a 1px-wide column gives streak aspect 1:10 (w:h)
+  const n = 10;
+  const canvas = document.createElement('canvas');
+  canvas.width = n;
+  canvas.height = n;
+  const ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, n, n);
+  ctx.fillStyle = '#ffffff';
+  ctx.fillRect(Math.floor((n - 1) / 2), 0, 1, n);
+  const tex = new THREE.CanvasTexture(canvas);
+  tex.magFilter = THREE.LinearFilter;
+  tex.minFilter = THREE.LinearFilter;
+  tex.colorSpace = THREE.SRGBColorSpace;
+  tex.needsUpdate = true;
+  return tex;
+}
+
 function buildRain() {
   const positions = new Float32Array(RAIN_COUNT * 3);
   const velocities = new Float32Array(RAIN_COUNT);
@@ -105,11 +123,15 @@ function buildRain() {
   rainGeo.userData.velocities = velocities;
 
   rainMat = new THREE.PointsMaterial({
+    map: makeRainDropTexture(),
     color: 0x99ccdd,
-    size: 0.06,
+    // World-units height of the streak; width follows 1:10 texture aspect
+    size: 0.55,
     transparent: true,
-    opacity: 0.4,
+    opacity: 0.34,
     depthWrite: false,
+    sizeAttenuation: true,
+    alphaTest: 0.02,
   });
 
   rain = new THREE.Points(rainGeo, rainMat);
