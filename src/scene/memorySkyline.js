@@ -1,0 +1,181 @@
+import * as THREE from 'three';
+
+const RAIN_COUNT = 4000;
+const DRIFT_SPEED = 0.00012;
+const FOG_NEAR = 1;
+const FOG_FAR = 55;
+
+const PALETTES = [
+  { fog: 0x050508, accent: 0x00e5ff },
+  { fog: 0x08060a, accent: 0x9966ff },
+  { fog: 0x0a0806, accent: 0xff9e40 },
+  { fog: 0x06080a, accent: 0x00e5ff },
+  { fog: 0x080508, accent: 0xff5577 },
+  { fog: 0x050808, accent: 0x00ffa0 },
+  { fog: 0x080605, accent: 0xffcc33 },
+  { fog: 0x050508, accent: 0x00e5ff },
+];
+
+let renderer, scene, camera, rainGeo, rainMat, rain;
+let frameId = null;
+let paletteIndex = 0;
+let targetFogColor = new THREE.Color(PALETTES[0].fog);
+let targetAccent = new THREE.Color(PALETTES[0].accent);
+
+const prefersReducedMotion =
+  window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+export function initScene() {
+  const canvas = document.getElementById('bg-canvas');
+  if (!canvas) return;
+
+  renderer = new THREE.WebGLRenderer({ canvas, antialias: false, alpha: false });
+  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+  renderer.setSize(window.innerWidth, window.innerHeight);
+
+  scene = new THREE.Scene();
+  scene.fog = new THREE.Fog(PALETTES[0].fog, FOG_NEAR, FOG_FAR);
+  scene.background = new THREE.Color(PALETTES[0].fog);
+
+  camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 100);
+  camera.position.set(0, 2, 8);
+
+  buildCityBlocks();
+  buildRain();
+
+  const ambient = new THREE.AmbientLight(0x111122, 0.6);
+  scene.add(ambient);
+
+  const point = new THREE.PointLight(PALETTES[0].accent, 1.2, 30);
+  point.position.set(2, 6, 4);
+  scene.add(point);
+
+  window.addEventListener('resize', onResize);
+  document.addEventListener('visibilitychange', onVisibilityChange);
+  window.addEventListener('memory:select', onMemorySelect);
+
+  if (!prefersReducedMotion) {
+    animate();
+  } else {
+    renderer.render(scene, camera);
+  }
+}
+
+function buildCityBlocks() {
+  const geo = new THREE.BoxGeometry(1, 1, 1);
+  const mat = new THREE.MeshStandardMaterial({
+    color: 0x0c0e14,
+    roughness: 0.9,
+    metalness: 0.3,
+  });
+
+  const count = 60;
+  const mesh = new THREE.InstancedMesh(geo, mat, count);
+  const dummy = new THREE.Object3D();
+
+  for (let i = 0; i < count; i++) {
+    const x = (Math.random() - 0.5) * 40;
+    const z = -Math.random() * 35 - 3;
+    const h = 1 + Math.random() * 8;
+    const w = 0.6 + Math.random() * 1.8;
+    const d = 0.6 + Math.random() * 1.8;
+
+    dummy.position.set(x, h / 2, z);
+    dummy.scale.set(w, h, d);
+    dummy.updateMatrix();
+    mesh.setMatrixAt(i, dummy.matrix);
+  }
+
+  scene.add(mesh);
+}
+
+function buildRain() {
+  const positions = new Float32Array(RAIN_COUNT * 3);
+  const velocities = new Float32Array(RAIN_COUNT);
+
+  for (let i = 0; i < RAIN_COUNT; i++) {
+    positions[i * 3]     = (Math.random() - 0.5) * 30;
+    positions[i * 3 + 1] = Math.random() * 20;
+    positions[i * 3 + 2] = (Math.random() - 0.5) * 30;
+    velocities[i] = 0.08 + Math.random() * 0.14;
+  }
+
+  rainGeo = new THREE.BufferGeometry();
+  rainGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+  rainGeo.userData.velocities = velocities;
+
+  rainMat = new THREE.PointsMaterial({
+    color: 0x99ccdd,
+    size: 0.06,
+    transparent: true,
+    opacity: 0.4,
+    depthWrite: false,
+  });
+
+  rain = new THREE.Points(rainGeo, rainMat);
+  scene.add(rain);
+}
+
+function animate() {
+  frameId = requestAnimationFrame(animate);
+
+  const t = performance.now();
+
+  camera.position.x = Math.sin(t * DRIFT_SPEED) * 1.2;
+  camera.position.y = 2 + Math.sin(t * DRIFT_SPEED * 0.7) * 0.3;
+  camera.lookAt(0, 1.5, -6);
+
+  updateRain();
+  lerpSceneColors();
+
+  renderer.render(scene, camera);
+}
+
+function updateRain() {
+  const pos = rainGeo.attributes.position.array;
+  const vel = rainGeo.userData.velocities;
+
+  for (let i = 0; i < RAIN_COUNT; i++) {
+    pos[i * 3 + 1] -= vel[i];
+    if (pos[i * 3 + 1] < -1) {
+      pos[i * 3 + 1] = 18 + Math.random() * 4;
+    }
+  }
+
+  rainGeo.attributes.position.needsUpdate = true;
+}
+
+function lerpSceneColors() {
+  scene.fog.color.lerp(targetFogColor, 0.015);
+  scene.background.lerp(targetFogColor, 0.015);
+
+  const point = scene.children.find((c) => c.isPointLight);
+  if (point) {
+    point.color.lerp(targetAccent, 0.02);
+  }
+}
+
+function onMemorySelect(e) {
+  const idx = PALETTES.length > 0
+    ? (paletteIndex + 1) % PALETTES.length
+    : 0;
+  paletteIndex = idx;
+  targetFogColor = new THREE.Color(PALETTES[idx].fog);
+  targetAccent = new THREE.Color(PALETTES[idx].accent);
+}
+
+function onResize() {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+}
+
+function onVisibilityChange() {
+  if (prefersReducedMotion) return;
+  if (document.hidden) {
+    cancelAnimationFrame(frameId);
+    frameId = null;
+  } else if (!frameId) {
+    animate();
+  }
+}

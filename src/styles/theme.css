@@ -1,0 +1,76 @@
+/* ── Design tokens ──────────────────────────────────────── */
+
+:root {
+  /* Surfaces */
+  --bg:          #050508;
+  --bg-subtle:   #0b0d12;
+  --surface:     rgba(12, 14, 20, 0.85);
+  --surface-alt: rgba(18, 22, 30, 0.7);
+
+  /* Text */
+  --text:        #d4d2cb;
+  --text-dim:    #7a7870;
+  --text-bright: #f0ece0;
+
+  /* Accent — cyan/teal neon; one color family keeps it cohesive */
+  --accent:      #00e5ff;
+  --accent-dim:  rgba(0, 229, 255, 0.25);
+  --accent-glow: rgba(0, 229, 255, 0.08);
+
+  /* Warm counterpoint for dates / metadata */
+  --warm:        #ff9e40;
+  --warm-dim:    rgba(255, 158, 64, 0.2);
+
+  /* Layout */
+  --max-content: 1280px;
+  --gap:         2rem;
+  --radius:      2px;
+
+  /* Type */
+  --font-ui:      'Barlow Condensed', 'Arial Narrow', sans-serif;
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-mono:    'SF Mono', 'Fira Code', monospace;
+}
+
+/* ── Reset / base ───────────────────────────────────────── */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  font-family: var(--font-ui);
+  font-weight: 400;
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.6;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+::selection {
+  background: var(--accent-dim);
+  color: var(--text-bright);
+}
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: inherit;
+}
+
+/* ── Scrollbar ──────────────────────────────────────────── */
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--surface-alt); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent-dim); }

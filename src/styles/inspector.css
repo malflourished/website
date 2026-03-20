@@ -1,0 +1,76 @@
+/* ── Inspector panel ─────────────────────────────────────── */
+
+.inspector {
+  border-left: 1px solid var(--accent-dim);
+  padding: 1.5rem 2.5rem;
+  min-height: 50vh;
+}
+
+.inspector__empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 30vh;
+  color: var(--text-dim);
+  font-style: italic;
+}
+
+/* ── Filled state (rendered by JS) ───────────────────────── */
+
+.inspector__content {
+  animation: inspectorIn 0.4s ease both;
+}
+
+.inspector__year {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--warm);
+  margin-bottom: 0.5rem;
+}
+
+.inspector__title {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  font-weight: 700;
+  color: var(--text-bright);
+  line-height: 1.1;
+  margin-bottom: 1.25rem;
+}
+
+.inspector__body {
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: var(--text);
+  max-width: 62ch;
+}
+
+.inspector__tags {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
+}
+
+.inspector__tag {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent);
+  border: 1px solid var(--accent-dim);
+  border-radius: var(--radius);
+  padding: 0.2em 0.6em;
+}
+
+@keyframes inspectorIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

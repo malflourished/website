@@ -1,0 +1,68 @@
+/* ── Canvas backdrop ─────────────────────────────────────── */
+
+#bg-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ── App shell ──────────────────────────────────────────── */
+
+#app {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Hero ────────────────────────────────────────────────── */
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 55vh;
+  padding: 3rem 4rem 2.5rem;
+  position: relative;
+}
+
+.hero__label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--warm);
+  margin-bottom: 0.75rem;
+}
+
+.hero__title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(3rem, 8vw, 6.5rem);
+  line-height: 0.95;
+  color: var(--text-bright);
+  letter-spacing: -0.02em;
+  max-width: 10ch;
+}
+
+.hero__sub {
+  margin-top: 1.25rem;
+  font-size: 1rem;
+  color: var(--text-dim);
+  max-width: 36ch;
+}
+
+/* ── Main layout: timeline + inspector side by side ─────── */
+
+.timeline-container {
+  display: grid;
+  grid-template-columns: minmax(280px, 400px) 1fr;
+  gap: 0;
+  flex: 1;
+  padding: 0 4rem 4rem;
+  max-width: var(--max-content);
+}
