@@ -1,4 +1,4 @@
-# Tyson Dale — Experience
+# malflourished — Experience
 
 A Blade Runner–inspired work-experience timeline — dark atmosphere, rain, and neon.
 

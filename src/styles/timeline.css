@@ -89,7 +89,7 @@
   font-size: 0.7rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--warm);
+  color: var(--accent-2);
 }
 
 .timeline-node__studio {

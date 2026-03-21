@@ -1,4 +1,8 @@
 import { defineConfig } from 'vite';
+import { resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const __dirname = fileURLToPath(new URL('.', import.meta.url));
 
 /**
  * Production uses relative URLs (`./assets/...`) so the same build works on:
@@ -13,5 +17,15 @@ export default defineConfig(({ command }) => ({
   build: {
     outDir: 'dist',
     emptyOutDir: true,
+    rollupOptions: {
+      input: {
+        main: resolve(__dirname, 'index.html'),
+        landing: resolve(__dirname, 'landing.html'),
+        reel: resolve(__dirname, 'reel.html'),
+        interactive: resolve(__dirname, 'interactive.html'),
+        blog: resolve(__dirname, 'blog.html'),
+        about: resolve(__dirname, 'about.html'),
+      },
+    },
   },
 }));

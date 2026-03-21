@@ -1,25 +1,24 @@
 /* ── Design tokens ──────────────────────────────────────── */
 
 :root {
-  /* Surfaces */
-  --bg:          #050508;
-  --bg-subtle:   #0b0d12;
-  --surface:     rgba(12, 14, 20, 0.85);
-  --surface-alt: rgba(18, 22, 30, 0.7);
+  /* Surfaces — true black base, slight lift for panels */
+  --bg:          #000000;
+  --bg-subtle:   #0a0a0a;
+  --surface:     rgba(12, 12, 14, 0.92);
+  --surface-alt: rgba(22, 22, 24, 0.78);
 
-  /* Text */
-  --text:        #d4d2cb;
-  --text-dim:    #7a7870;
-  --text-bright: #f0ece0;
+  /* Text — pure white scale */
+  --text:        rgba(255, 255, 255, 0.82);
+  --text-dim:    rgba(255, 255, 255, 0.42);
+  --text-bright: #ffffff;
 
-  /* Accent — cyan/teal neon; one color family keeps it cohesive */
-  --accent:      #00e5ff;
-  --accent-dim:  rgba(0, 229, 255, 0.25);
-  --accent-glow: rgba(0, 229, 255, 0.08);
+  /* Accent hierarchy: console purple (primary) → slime green (secondary) */
+  --accent:      #8000ff;
+  --accent-dim:  rgba(128, 0, 255, 0.28);
+  --accent-glow: rgba(128, 0, 255, 0.1);
 
-  /* Warm counterpoint for dates / metadata */
-  --warm:        #ff9e40;
-  --warm-dim:    rgba(255, 158, 64, 0.2);
+  --accent-2:     #70e910;
+  --accent-2-dim: rgba(112, 233, 16, 0.28);
 
   /* Layout */
   --max-content: 1280px;
@@ -53,6 +52,14 @@ body {
   overflow: hidden;
   min-height: 100%;
   height: 100%;
+}
+
+/* Inner pages: allow document scroll when content grows (e.g. blog). */
+html:has(body.page-simple),
+body.page-simple {
+  overflow-y: auto;
+  height: auto;
+  min-height: 100%;
 }
 
 ::selection {

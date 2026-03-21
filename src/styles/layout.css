@@ -24,6 +24,97 @@
   overflow: hidden;
 }
 
+#app.app--simple {
+  max-height: none;
+  min-height: 100vh;
+  min-height: 100dvh;
+  height: auto;
+  overflow: visible;
+}
+
+/* ── Site nav ───────────────────────────────────────────── */
+
+.site-nav {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem 2rem;
+  flex-wrap: wrap;
+  padding: 1rem 4rem;
+  border-bottom: 1px solid var(--accent-dim);
+}
+
+.site-nav__brand {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent-2);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.site-nav__brand:hover {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.site-nav__links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.5rem 1.25rem;
+  list-style: none;
+}
+
+.site-nav__link {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  text-decoration: none;
+}
+
+.site-nav__link:hover {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.site-nav__link[aria-current='page'] {
+  color: var(--accent-2);
+  text-decoration: none;
+}
+
+/* ── Simple inner pages ──────────────────────────────────── */
+
+.page-main {
+  flex: 1;
+  min-height: 0;
+  padding: 2rem 4rem 2.5rem;
+  max-width: var(--max-content);
+  width: 100%;
+  margin: 0 auto;
+}
+
+.page-main__title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
+  line-height: 1.05;
+  color: var(--text-bright);
+  letter-spacing: -0.02em;
+  margin-bottom: 0.75rem;
+}
+
+.page-main__lede {
+  font-size: 0.95rem;
+  color: var(--text-dim);
+  max-width: 42ch;
+}
+
 /* ── Hero ────────────────────────────────────────────────── */
 
 .hero {
@@ -40,7 +131,7 @@
   font-size: 0.75rem;
   letter-spacing: 0.25em;
   text-transform: uppercase;
-  color: var(--warm);
+  color: var(--accent-2);
   margin-bottom: 0.75rem;
 }
 
@@ -89,6 +180,14 @@
 }
 
 @media (max-width: 768px) {
+  .site-nav {
+    padding: 0.85rem 1.5rem;
+  }
+
+  .page-main {
+    padding: 1.5rem 1.5rem 2rem;
+  }
+
   .hero {
     padding: 1.25rem 1.5rem 0.75rem;
   }

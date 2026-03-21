@@ -39,8 +39,8 @@ body::before {
   top: -10vh;
   left: -10vw;
   background:
-    radial-gradient(ellipse 40% 50% at 15% 80%, rgba(0, 229, 255, 0.04), transparent),
-    radial-gradient(ellipse 35% 40% at 85% 20%, rgba(255, 158, 64, 0.03), transparent);
+    radial-gradient(ellipse 40% 50% at 15% 80%, rgba(128, 0, 255, 0.05), transparent),
+    radial-gradient(ellipse 35% 40% at 85% 20%, rgba(112, 233, 16, 0.04), transparent);
 }
 
 /* ── Reduced motion ──────────────────────────────────────── */

@@ -1,0 +1,29 @@
+/* Full-bleed ASCII backdrop; nav from layout stays interactive */
+
+body.page-landing {
+  background: #000;
+  overflow: hidden;
+}
+
+#ascii-canvas {
+  position: fixed;
+  left: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+#app.app--landing {
+  position: relative;
+  z-index: 1;
+  min-height: 100dvh;
+  height: 100dvh;
+  background: transparent;
+  pointer-events: none;
+}
+
+#app.app--landing .site-nav {
+  pointer-events: auto;
+  background: #000;
+  position: relative;
+  z-index: 2;
+}

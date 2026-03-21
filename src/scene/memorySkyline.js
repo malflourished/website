@@ -3,17 +3,19 @@ import * as THREE from 'three';
 const RAIN_COUNT = 4000;
 const DRIFT_SPEED = 0.00012;
 const FOG_NEAR = 1;
-const FOG_FAR = 55;
+const FOG_FAR = 48;
+
+/** Sky / fog stay black; only the point-light accent shifts on memory select. */
+const BLACK = 0x000000;
 
 const PALETTES = [
-  { fog: 0x050508, accent: 0x00e5ff },
-  { fog: 0x08060a, accent: 0x9966ff },
-  { fog: 0x0a0806, accent: 0xff9e40 },
-  { fog: 0x06080a, accent: 0x00e5ff },
-  { fog: 0x080508, accent: 0xff5577 },
-  { fog: 0x050808, accent: 0x00ffa0 },
-  { fog: 0x080605, accent: 0xffcc33 },
-  { fog: 0x050508, accent: 0x00e5ff },
+  { fog: BLACK, accent: 0x8000ff },
+  { fog: BLACK, accent: 0x70e910 },
+  { fog: BLACK, accent: 0x8000ff },
+  { fog: BLACK, accent: 0x70e910 },
+  { fog: BLACK, accent: 0x8000ff },
+  { fog: BLACK, accent: 0x70e910 },
+  { fog: BLACK, accent: 0x8000ff },
 ];
 
 let renderer, scene, camera, rainGeo, rainMat, rain;
@@ -43,10 +45,10 @@ export function initScene() {
   buildCityBlocks();
   buildRain();
 
-  const ambient = new THREE.AmbientLight(0x111122, 0.6);
+  const ambient = new THREE.AmbientLight(0x0c0a12, 0.42);
   scene.add(ambient);
 
-  const point = new THREE.PointLight(PALETTES[0].accent, 1.2, 30);
+  const point = new THREE.PointLight(PALETTES[0].accent, 1.35, 32);
   point.position.set(2, 6, 4);
   scene.add(point);
 
@@ -64,9 +66,9 @@ export function initScene() {
 function buildCityBlocks() {
   const geo = new THREE.BoxGeometry(1, 1, 1);
   const mat = new THREE.MeshStandardMaterial({
-    color: 0x0c0e14,
-    roughness: 0.9,
-    metalness: 0.3,
+    color: 0x101012,
+    roughness: 0.92,
+    metalness: 0.22,
   });
 
   const count = 60;
@@ -124,11 +126,11 @@ function buildRain() {
 
   rainMat = new THREE.PointsMaterial({
     map: makeRainDropTexture(),
-    color: 0x99ccdd,
+    color: 0x9b70e8,
     // World-units height of the streak; width follows 1:10 texture aspect
     size: 0.55,
     transparent: true,
-    opacity: 0.34,
+    opacity: 0.28,
     depthWrite: false,
     sizeAttenuation: true,
     alphaTest: 0.02,
