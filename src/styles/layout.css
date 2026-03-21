@@ -14,9 +14,14 @@
 #app {
   position: relative;
   z-index: 1;
-  min-height: 100vh;
+  height: 100vh;
+  height: 100dvh;
+  min-height: 0;
+  max-height: 100vh;
+  max-height: 100dvh;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 /* ── Hero ────────────────────────────────────────────────── */
@@ -24,9 +29,9 @@
 .hero {
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  min-height: 55vh;
-  padding: 3rem 4rem 2.5rem;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  padding: 1.75rem 4rem 1rem;
   position: relative;
 }
 
@@ -42,33 +47,68 @@
 .hero__title {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: clamp(3rem, 8vw, 6.5rem);
+  font-size: clamp(2.25rem, 5vw, 4rem);
   line-height: 0.95;
   color: var(--text-bright);
   letter-spacing: -0.02em;
-  max-width: 10ch;
+  max-width: 12ch;
 }
 
 .hero__sub {
-  margin-top: 1.25rem;
-  font-size: 1rem;
+  margin-top: 0.65rem;
+  font-size: 0.95rem;
   color: var(--text-dim);
   max-width: 36ch;
 }
 
-/* ── Main layout: timeline + inspector side by side ─────── */
+/* ── Main layout: timeline (scrolls) + inspector (in place) ─ */
 
 .timeline-container {
   display: grid;
   grid-template-columns: minmax(280px, 400px) 1fr;
+  grid-template-rows: minmax(0, 1fr);
   gap: 0;
   flex: 1;
-  padding: 0 4rem 4rem;
+  min-height: 0;
+  padding: 0 4rem 1.5rem;
   max-width: var(--max-content);
-  align-items: start;
+  width: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+  align-items: stretch;
 }
 
 .timeline-container .timeline {
   justify-self: stretch;
   width: 100%;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 0.5rem;
+  margin-right: -0.5rem;
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding: 1.25rem 1.5rem 0.75rem;
+  }
+
+  .timeline-container {
+    grid-template-columns: 1fr;
+    grid-template-rows: minmax(0, 38vh) minmax(0, 1fr);
+    padding: 0 1.5rem 1rem;
+  }
+
+  .timeline-container .timeline {
+    border-bottom: 1px solid var(--accent-dim);
+    padding-bottom: 0.75rem;
+    margin-right: 0;
+    padding-right: 0;
+  }
+
+  .inspector {
+    border-left: none;
+    border-top: none;
+    padding: 1rem 0 0;
+  }
 }
