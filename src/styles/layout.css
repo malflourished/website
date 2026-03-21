@@ -65,4 +65,10 @@
   flex: 1;
   padding: 0 4rem 4rem;
   max-width: var(--max-content);
+  align-items: start;
+}
+
+.timeline-container .timeline {
+  justify-self: stretch;
+  width: 100%;
 }

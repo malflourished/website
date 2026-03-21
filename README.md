@@ -1,6 +1,6 @@
-# Memory Timeline
+# Tyson Dale — Experience
 
-A Blade Runner–inspired interactive memory timeline — dark atmosphere, rain, and neon.
+A Blade Runner–inspired work-experience timeline — dark atmosphere, rain, and neon.
 
 ## Quick start
 
@@ -42,7 +42,7 @@ index.html              Entry point
 src/
   main.js               App bootstrap (imports styles + modules)
   timeline.js           Data-driven timeline + inspector logic
-  data/memories.json    Content — add/edit memories here
+  data/experience.json  Work experience — one entry per role
   scene/memorySkyline.js  Three.js atmospheric backdrop
   styles/
     theme.css           Design tokens, reset, base
@@ -54,17 +54,23 @@ src/
 
 ## Editing content
 
-All memory entries live in `src/data/memories.json`. Each entry:
+Work experience lives in `src/data/experience.json`. Content is **manually synced** from [LinkedIn](https://www.linkedin.com/in/tysonjamesdale/) — update the file when your profile changes. Each entry:
 
 ```json
 {
-  "id":    "2019-sector",
-  "year":  "2019",
-  "title": "Sector Seven",
-  "body":  "Description text...",
-  "tags":  ["place", "night"]
+  "id":      "acme-senior-engineer",
+  "period":  "2021 – 2023",
+  "studio":  "Acme Corp · Industry · City, ST",
+  "company": "Acme Corp",
+  "role":    "Senior Engineer",
+  "body":    "Description of the role...",
+  "tags":    ["Python", "AWS", "Leadership"]
 }
 ```
+
+`studio` appears on the timeline spine (above the role) and in the detail panel. If omitted, `company` is used instead.
+
+Optional **`image`**: URL string (site-relative like `./photos/role.jpg` or absolute HTTPS). When set, the detail panel shows the image; otherwise a dashed placeholder box appears until you add one.
 
 ## Tuning the mood
 

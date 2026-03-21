@@ -4,6 +4,7 @@
   border-left: 1px solid var(--accent-dim);
   padding: 1.5rem 2.5rem;
   min-height: 50vh;
+  text-align: left;
 }
 
 .inspector__empty {
@@ -21,7 +22,13 @@
   animation: inspectorIn 0.4s ease both;
 }
 
-.inspector__year {
+.inspector__header {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--accent-dim);
+}
+
+.inspector__period {
   font-family: var(--font-mono);
   font-size: 0.7rem;
   letter-spacing: 0.25em;
@@ -30,13 +37,33 @@
   margin-bottom: 0.5rem;
 }
 
+.inspector__studio {
+  font-size: 0.85rem;
+  line-height: 1.4;
+  color: var(--text-dim);
+  margin-bottom: 0.75rem;
+  max-width: 62ch;
+}
+
 .inspector__title {
   font-family: var(--font-display);
   font-size: clamp(1.8rem, 3.5vw, 2.8rem);
   font-weight: 700;
   color: var(--text-bright);
   line-height: 1.1;
-  margin-bottom: 1.25rem;
+  margin-bottom: 0;
+}
+
+/* Body (left) + photo (right) */
+.inspector__detail {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(200px, 34%);
+  gap: 2rem;
+  align-items: start;
+}
+
+.inspector__copy {
+  min-width: 0;
 }
 
 .inspector__body {
@@ -44,13 +71,52 @@
   line-height: 1.75;
   color: var(--text);
   max-width: 62ch;
+  margin: 0;
+}
+
+.inspector__media {
+  min-width: 0;
+}
+
+.inspector__figure {
+  margin: 0;
+}
+
+.inspector__image {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+  border: 1px solid var(--accent-dim);
+}
+
+.inspector__photo-placeholder {
+  aspect-ratio: 4 / 3;
+  min-height: 12rem;
+  border-radius: var(--radius);
+  border: 1px dashed var(--accent-dim);
+  background: var(--surface-alt);
+  box-sizing: border-box;
+}
+
+.inspector__figure--placeholder .inspector__photo-placeholder {
+  background:
+    linear-gradient(135deg, var(--surface-alt) 0%, var(--bg-subtle) 100%);
 }
 
 .inspector__tags {
   display: flex;
   gap: 0.5rem;
   flex-wrap: wrap;
-  margin-top: 1.5rem;
+  margin-top: 2rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--accent-dim);
+}
+
+@media (max-width: 900px) {
+  .inspector__detail {
+    grid-template-columns: 1fr;
+  }
 }
 
 .inspector__tag {
