@@ -9,7 +9,7 @@
   <div class="grain-overlay" aria-hidden="true"></div>
 
   <div id="app" class="app--simple">
-    <nav class="site-nav" aria-label="Site">
+    <nav class="site-nav phosphor-bloom--full" aria-label="Site">
       <a class="site-nav__brand" href="landing.html">malflourished</a>
       <ul class="site-nav__links">
         <li><a class="site-nav__link" href="reel.html">Reel</a></li>
@@ -20,12 +20,13 @@
       </ul>
     </nav>
 
-    <main class="page-main">
+    <main class="page-main page-main--blog phosphor-bloom--full">
       <h1 class="page-main__title">Blog</h1>
-      <p class="page-main__lede">Writing and notes will live here.</p>
+      <p class="page-main__lede">Notes and longer-form writing. Posts are plain data in JSON; click a title to read.</p>
+      <div id="blog-app" aria-live="polite"></div>
     </main>
   </div>
 
-  <script type="module" src="/src/page-shell.js"></script>
+  <script type="module" src="/src/blog.js"></script>
 </body>
 </html>

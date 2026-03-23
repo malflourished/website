@@ -1,0 +1,117 @@
+/* ── Blog list + posts ───────────────────────────────────── */
+
+.page-main--blog .page-main__lede {
+  max-width: min(62ch, 100%);
+  margin-bottom: 2rem;
+}
+
+.blog-toolbar {
+  margin-bottom: 1.5rem;
+}
+
+.blog-back {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.blog-back:hover {
+  color: var(--accent-hover);
+}
+
+.blog-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+.blog-list__item {
+  padding-bottom: 1.75rem;
+  border-bottom: 1px solid var(--accent-dim);
+}
+
+.blog-list__item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.blog-list__link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Override global `a:hover { text-decoration: underline }` in theme.css — the
+   whole card is one link, so that rule underlined every wrapped line. */
+.blog-list__link:hover,
+.blog-list__link:focus-visible {
+  text-decoration: none;
+}
+
+.blog-list__meta {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.35rem;
+}
+
+.blog-list__title {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1.2;
+  margin: 0 0 0.4rem;
+}
+
+.blog-list__excerpt {
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: var(--text);
+  margin: 0;
+  max-width: 62ch;
+}
+
+.blog-article__header {
+  margin-bottom: 1.5rem;
+}
+
+.blog-article__meta {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 0.5rem;
+}
+
+.blog-article__title {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3.5vw, 2.25rem);
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1.1;
+  margin: 0;
+}
+
+.blog-article__body {
+  font-size: 0.98rem;
+  line-height: 1.75;
+  color: var(--text);
+  max-width: 62ch;
+}
+
+.blog-article__body p {
+  margin: 0 0 1rem;
+}
+
+.blog-article__body p:last-child {
+  margin-bottom: 0;
+}

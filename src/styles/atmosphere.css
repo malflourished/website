@@ -9,7 +9,17 @@
   min-height: 0;
   overflow: hidden;
   isolation: isolate;
+  /* Bloom is per-region: .phosphor-bloom--full vs --media (see globalPhosphor.js) */
+}
+
+/* UI / type — full phosphor */
+.phosphor-bloom--full {
   filter: url(#malf-phosphor-bloom);
+}
+
+/* Images, video, hero frames — softer bloom (factor in globalPhosphor.js) */
+.phosphor-bloom--media {
+  filter: url(#malf-phosphor-bloom-media);
 }
 
 body.page-simple .phosphor-root {
@@ -73,8 +83,9 @@ body::before {
 /* ── Reduced motion ──────────────────────────────────────── */
 
 @media (prefers-reduced-motion: reduce) {
-  .phosphor-root {
-    filter: none;
+  .phosphor-bloom--full,
+  .phosphor-bloom--media {
+    filter: none !important;
   }
 
   .grain-overlay {

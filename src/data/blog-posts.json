@@ -1,0 +1,16 @@
+[
+  {
+    "id": "welcome",
+    "title": "Hello, world",
+    "date": "2026-03-23",
+    "excerpt": "A tiny placeholder post while the blog takes shape.",
+    "body": "This is a static blog powered by a JSON file and a small script. Each entry has an id, title, date, optional excerpt, and body text.\n\nParagraphs are separated by blank lines. Swap this copy for something real whenever you like."
+  },
+  {
+    "id": "process-notes",
+    "title": "Process notes",
+    "date": "2026-03-20",
+    "excerpt": "Short notes on how work actually gets done.",
+    "body": "Another sample post. Use the same pattern in blog-posts.json: add an object, keep ids unique, and use the date field for sorting (newest first in the list).\n\nLink to a post with blog.html#process-notes."
+  }
+]

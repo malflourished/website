@@ -43,6 +43,8 @@ src/
   main.js               App bootstrap (imports styles + modules)
   timeline.js           Data-driven timeline + inspector logic
   data/experience.json  Work experience — one entry per role
+  data/blog-posts.json Blog posts (see README → Blog)
+  blog.js               Blog list + hash-routed post view
   scene/memorySkyline.js  Optional Three.js backdrop (unused on Work page)
   styles/
     theme.css           Design tokens, reset, base
@@ -51,6 +53,10 @@ src/
     inspector.css       Detail panel
     atmosphere.css      Grain overlay, vignette, ambient glow
 ```
+
+## About page photo
+
+Portrait lives at **`public/photos/about.png`** (see `about.html` to change). `public/photos/README.txt` has a short note.
 
 ## Editing content
 
@@ -70,10 +76,30 @@ Work experience lives in `src/data/experience.json`. Content is **manually synce
 
 `studio` appears on the timeline spine (above the role) and in the detail panel. If omitted, `company` is used instead.
 
-Optional **`image`**: URL string (site-relative like `./photos/role.jpg` or absolute HTTPS). When set, the detail panel shows the image; otherwise a dashed placeholder box appears until you add one.
+Detail column is **video-first** (see mockup): hero media on top, then period / studio, title, rule, body, tags.
+
+- **`video`** (optional): direct file URL (e.g. `.mp4`, `.webm`). Renders a **16:9** player above the copy.
+- **`videoPoster`** (optional): poster image URL for the `<video>` element.
+- **`image`** (optional): if there is no `video`, a still is shown in the same hero frame (**object-fit: cover**).
+- If neither is set, a **placeholder** block appears until you add media.
+
+## Blog
+
+Posts live in **`src/data/blog-posts.json`**. Each entry:
+
+| Field | Required | Notes |
+|-------|----------|--------|
+| `id` | yes | URL fragment, e.g. `welcome` → `blog.html#welcome` (keep unique) |
+| `title` | yes | Headline |
+| `date` | yes | `YYYY-MM-DD` (used for display and sort) |
+| `excerpt` | no | Shown on the index list |
+| `body` | yes | Plain text; separate paragraphs with a blank line (`\n\n`) |
+
+The Blog page (`blog.html`) loads **`src/blog.js`**, which lists posts newest-first and shows the full body when the hash matches a post id. No separate HTML per post.
 
 ## Tuning the mood
 
+- **Phosphor bloom**: base blur/add amounts and **media vs UI** strength live in `src/globalPhosphor.js` (`BLOOM_*`, `MEDIA_BLOOM_FACTOR`). UI uses class `phosphor-bloom--full`; images/video/hero use `phosphor-bloom--media` (half strength by default).
 - **Site accent (orange / amber)**: edit **`--accent`** in `src/styles/theme.css` only. CSS uses `color-mix()` for dim/glow/hover; canvas/WebGL read the same variable via `src/theme/accent.js`.
 - **Other colors / type**: remaining variables in `src/styles/theme.css`.
 - **Optional 3D backdrop**: `src/scene/memorySkyline.js` (not wired on Work; re-hook from `main.js` if needed).
