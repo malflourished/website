@@ -7,28 +7,28 @@
   --surface:     rgba(12, 12, 14, 0.92);
   --surface-alt: rgba(22, 22, 24, 0.78);
 
-  /* Text — pure white scale */
-  --text:        rgba(255, 255, 255, 0.82);
-  --text-dim:    rgba(255, 255, 255, 0.42);
+  /* Body / supporting copy — white */
+  --text:        rgba(255, 255, 255, 0.92);
+  --text-dim:    rgba(255, 255, 255, 0.58);
   --text-bright: #ffffff;
 
-  /* Accent hierarchy: console purple (primary) → slime green (secondary) */
-  --accent:      #8000ff;
-  --accent-dim:  rgba(128, 0, 255, 0.28);
-  --accent-glow: rgba(128, 0, 255, 0.1);
-
-  --accent-2:     #70e910;
-  --accent-2-dim: rgba(112, 233, 16, 0.28);
+  /* ── Site accent (single edit point) ───────────────────────
+     Headlines, links, canvas CRT fill, Three.js lights, etc.
+     Optional: set --accent-hover yourself; otherwise it mixes toward white. */
+  --accent: #ff0047;
+  --accent-hover: color-mix(in srgb, var(--accent) 62%, #ffffff);
+  --accent-dim: color-mix(in srgb, var(--accent) 35%, transparent);
+  --accent-glow: color-mix(in srgb, var(--accent) 14%, transparent);
 
   /* Layout */
   --max-content: 1280px;
   --gap:         2rem;
   --radius:      2px;
 
-  /* Type — Departure Mono site-wide (pixel font; sizes use 11px grid where it matters) */
-  --font-ui:      'Departure Mono', ui-monospace, monospace;
-  --font-display: 'Departure Mono', ui-monospace, monospace;
-  --font-mono:    'Departure Mono', ui-monospace, monospace;
+  /* Type — system monospace stack (same family as landing CRT) */
+  --font-ui:      ui-monospace, 'Cascadia Code', 'SF Mono', Menlo, Monaco, monospace;
+  --font-display: ui-monospace, 'Cascadia Code', 'SF Mono', Menlo, Monaco, monospace;
+  --font-mono:    ui-monospace, 'Cascadia Code', 'SF Mono', Menlo, Monaco, monospace;
 }
 
 /* ── Reset / base ───────────────────────────────────────── */
@@ -54,12 +54,17 @@ body {
   height: 100%;
 }
 
-/* Inner pages: allow document scroll when content grows (e.g. blog). */
-html:has(body.page-simple),
-body.page-simple {
-  overflow-y: auto;
+/* Inner pages: scroll the phosphor wrapper so the global filter still wraps all content. */
+html:has(body.page-simple) {
   height: auto;
   min-height: 100%;
+  overflow: hidden;
+}
+
+body.page-simple {
+  overflow: hidden;
+  min-height: 100%;
+  height: auto;
 }
 
 ::selection {

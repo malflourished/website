@@ -1,3 +1,37 @@
+/* ── Global phosphor stack (filter applies to this subtree) ─ */
+
+.phosphor-root {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
+  isolation: isolate;
+  filter: url(#malf-phosphor-bloom);
+}
+
+body.page-simple .phosphor-root {
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Vignette inside the filtered layer (above canvas / app, below grain) */
+.phosphor-root::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 50%,
+    rgba(0, 0, 0, 0.55) 100%
+  );
+}
+
 /* ── Grain / noise overlay ───────────────────────────────── */
 
 .grain-overlay {
@@ -12,21 +46,6 @@
   background-size: 256px 256px;
 }
 
-/* ── Vignette ────────────────────────────────────────────── */
-
-body::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  z-index: 2;
-  pointer-events: none;
-  background: radial-gradient(
-    ellipse at center,
-    transparent 50%,
-    rgba(0, 0, 0, 0.55) 100%
-  );
-}
-
 /* ── Ambient glow spots ──────────────────────────────────── */
 
 body::before {
@@ -39,13 +58,25 @@ body::before {
   top: -10vh;
   left: -10vw;
   background:
-    radial-gradient(ellipse 40% 50% at 15% 80%, rgba(128, 0, 255, 0.05), transparent),
-    radial-gradient(ellipse 35% 40% at 85% 20%, rgba(112, 233, 16, 0.04), transparent);
+    radial-gradient(
+      ellipse 40% 50% at 15% 80%,
+      color-mix(in srgb, var(--accent) 6%, transparent),
+      transparent
+    ),
+    radial-gradient(
+      ellipse 35% 40% at 85% 20%,
+      color-mix(in srgb, var(--accent) 4.5%, transparent),
+      transparent
+    );
 }
 
 /* ── Reduced motion ──────────────────────────────────────── */
 
 @media (prefers-reduced-motion: reduce) {
+  .phosphor-root {
+    filter: none;
+  }
+
   .grain-overlay {
     animation: none !important;
     opacity: 0.02;

@@ -1,6 +1,6 @@
 # malflourished — Experience
 
-A Blade Runner–inspired work-experience timeline — dark atmosphere, rain, and neon.
+A Blade Runner–inspired work-experience timeline — dark atmosphere and CRT-style phosphor type.
 
 ## Quick start
 
@@ -43,7 +43,7 @@ src/
   main.js               App bootstrap (imports styles + modules)
   timeline.js           Data-driven timeline + inspector logic
   data/experience.json  Work experience — one entry per role
-  scene/memorySkyline.js  Three.js atmospheric backdrop
+  scene/memorySkyline.js  Optional Three.js backdrop (unused on Work page)
   styles/
     theme.css           Design tokens, reset, base
     layout.css          Hero + grid layout
@@ -74,8 +74,9 @@ Optional **`image`**: URL string (site-relative like `./photos/role.jpg` or abso
 
 ## Tuning the mood
 
-- **Colors / type**: CSS variables in `src/styles/theme.css`.
-- **3D scene**: constants at the top of `src/scene/memorySkyline.js` (rain count, fog distance, drift speed, palettes).
+- **Site accent (orange / amber)**: edit **`--accent`** in `src/styles/theme.css` only. CSS uses `color-mix()` for dim/glow/hover; canvas/WebGL read the same variable via `src/theme/accent.js`.
+- **Other colors / type**: remaining variables in `src/styles/theme.css`.
+- **Optional 3D backdrop**: `src/scene/memorySkyline.js` (not wired on Work; re-hook from `main.js` if needed).
 
 ## Fonts
 

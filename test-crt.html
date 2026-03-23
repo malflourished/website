@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>CRT effects test</title>
+  <style>
+    /* Keep --accent in sync with src/styles/theme.css */
+    :root { --accent: #ff9f00; }
+    body { background: #000; margin: 0; font-family: monospace; color: #fff; }
+    canvas { display: block; }
+    .label { position: fixed; top: 10px; left: 10px; font-size: 14px; z-index: 1; }
+  </style>
+</head>
+<body>
+  <div class="label">CRT test — you should see: chromatic RGB split + soft glow bloom</div>
+  <canvas id="c"></canvas>
+  <script>
+    const W = 800;
+    const H = 400;
+    const canvas = document.getElementById('c');
+    canvas.width = W;
+    canvas.height = H;
+    canvas.style.width = W + 'px';
+    canvas.style.height = H + 'px';
+    const ctx = canvas.getContext('2d');
+
+    const OFFSET = 3;
+    const BLOOM_BLUR = 12;
+    const BLOOM_ALPHA = 0.7;
+
+    // Offscreen for bloom
+    const off = document.createElement('canvas');
+    off.width = W;
+    off.height = H;
+    const octx = off.getContext('2d');
+
+    const text = 'HELLO WORLD';
+    const font = 'bold 60px monospace';
+
+    // --- Test 1: Chromatic aberration via 3x fillText ---
+    ctx.fillStyle = '#000';
+    ctx.fillRect(0, 0, W, H);
+    ctx.font = font;
+    ctx.textBaseline = 'middle';
+
+    // Red shifted left
+    ctx.fillStyle = 'rgba(255, 80, 80, 0.9)';
+    ctx.fillText(text, 50 - OFFSET, 100);
+
+    // Green centered
+    ctx.fillStyle = 'rgba(80, 255, 80, 0.9)';
+    ctx.fillText(text, 50, 100);
+
+    // Blue shifted right
+    ctx.fillStyle = 'rgba(80, 80, 255, 0.9)';
+    ctx.fillText(text, 50 + OFFSET, 100);
+
+    // --- Reference: same text without aberration ---
+    ctx.fillStyle = '#ccc';
+    ctx.fillText(text, 50, 200);
+
+    // Label
+    ctx.font = '14px monospace';
+    ctx.fillStyle = '#666';
+    ctx.fillText('^ with chromatic aberration (3px offset)', 50, 140);
+    ctx.fillText('^ without (reference)', 50, 240);
+
+    // --- Test 2: Bloom via blur + lighter ---
+    ctx.fillStyle = '#000';
+    ctx.fillRect(0, 260, W, 140);
+    ctx.font = font;
+
+    // Draw sharp text (uses :root --accent above = same token as site theme)
+    ctx.fillStyle = getComputedStyle(document.documentElement)
+      .getPropertyValue('--accent')
+      .trim() || '#ff9f00';
+    ctx.fillText('BLOOM TEST', 50, 330);
+
+    // Copy to offscreen, blur back on top
+    octx.clearRect(0, 0, W, H);
+    octx.drawImage(canvas, 0, 0);
+
+    ctx.save();
+    ctx.globalCompositeOperation = 'lighter';
+    ctx.globalAlpha = BLOOM_ALPHA;
+    ctx.filter = 'blur(' + BLOOM_BLUR + 'px)';
+    ctx.drawImage(off, 0, 0);
+    ctx.restore();
+
+    // Debug: log that we got here
+    console.log('CRT test rendered. Canvas size:', W, 'x', H);
+    console.log('ctx.filter support:', typeof ctx.filter);
+  </script>
+</body>
+</html>

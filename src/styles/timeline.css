@@ -27,7 +27,6 @@
   position: relative;
   padding: 1.25rem 1.25rem 1.25rem 3rem;
   border-radius: var(--radius);
-  transition: background 0.3s ease;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -36,14 +35,9 @@
   text-align: left;
 }
 
-.timeline-node:hover {
-  background: var(--accent-glow);
-}
-
 .timeline-node:focus-visible {
   outline: 1px solid var(--accent);
-  outline-offset: -1px;
-  background: var(--accent-glow);
+  outline-offset: 2px;
 }
 
 /* Dot on the spine — align with first text line (period) */
@@ -60,11 +54,7 @@
   transition: border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Active / selected state */
-.timeline-node[aria-selected="true"] {
-  background: var(--accent-glow);
-}
-
+/* Active / selected — spine dot (+ title weight) only, no row fill */
 .timeline-node[aria-selected="true"]::before {
   border-color: var(--accent);
   background: var(--accent);
@@ -72,7 +62,8 @@
 }
 
 .timeline-node[aria-selected="true"] .timeline-node__title {
-  color: var(--text-bright);
+  color: var(--accent);
+  font-weight: 700;
 }
 
 /* Child text — block + full width keeps every row left-aligned */
@@ -89,18 +80,19 @@
   font-size: 0.7rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--accent-2);
+  color: var(--accent);
 }
 
 .timeline-node__studio {
   font-size: 0.78rem;
   line-height: 1.35;
-  color: var(--text-dim);
+  color: var(--text);
 }
 
 .timeline-node__title {
   font-family: var(--font-display);
   font-size: 1.15rem;
-  color: var(--text);
+  font-weight: 700;
+  color: var(--accent);
   transition: color 0.3s ease;
 }

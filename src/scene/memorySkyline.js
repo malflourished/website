@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { accentFillStyle } from '../theme/accent.js';
 
 const RAIN_COUNT = 4000;
 const DRIFT_SPEED = 0.00012;
@@ -8,21 +9,30 @@ const FOG_FAR = 48;
 /** Sky / fog stay black; only the point-light accent shifts on memory select. */
 const BLACK = 0x000000;
 
-const PALETTES = [
-  { fog: BLACK, accent: 0x8000ff },
-  { fog: BLACK, accent: 0x70e910 },
-  { fog: BLACK, accent: 0x8000ff },
-  { fog: BLACK, accent: 0x70e910 },
-  { fog: BLACK, accent: 0x8000ff },
-  { fog: BLACK, accent: 0x70e910 },
-  { fog: BLACK, accent: 0x8000ff },
-];
+/** Cycle tints derived from `theme.css` --accent (no hardcoded hex). */
+function buildAccentPalettes() {
+  const base = new THREE.Color(accentFillStyle());
+  const white = new THREE.Color(0xffffff);
+  const L = (t) => base.clone().lerp(white, t).getHex();
+  const D = (m) => base.clone().multiplyScalar(m).getHex();
+  return [
+    { fog: BLACK, accent: base.getHex() },
+    { fog: BLACK, accent: L(0.38) },
+    { fog: BLACK, accent: D(0.76) },
+    { fog: BLACK, accent: L(0.22) },
+    { fog: BLACK, accent: base.getHex() },
+    { fog: BLACK, accent: L(0.52) },
+    { fog: BLACK, accent: D(0.62) },
+  ];
+}
+
+let palettes = [];
 
 let renderer, scene, camera, rainGeo, rainMat, rain;
 let frameId = null;
 let paletteIndex = 0;
-let targetFogColor = new THREE.Color(PALETTES[0].fog);
-let targetAccent = new THREE.Color(PALETTES[0].accent);
+let targetFogColor = new THREE.Color(BLACK);
+let targetAccent = new THREE.Color(BLACK);
 
 const prefersReducedMotion =
   window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -31,13 +41,17 @@ export function initScene() {
   const canvas = document.getElementById('bg-canvas');
   if (!canvas) return;
 
+  palettes = buildAccentPalettes();
+  targetFogColor = new THREE.Color(palettes[0].fog);
+  targetAccent = new THREE.Color(palettes[0].accent);
+
   renderer = new THREE.WebGLRenderer({ canvas, antialias: false, alpha: false });
   renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
   renderer.setSize(window.innerWidth, window.innerHeight);
 
   scene = new THREE.Scene();
-  scene.fog = new THREE.Fog(PALETTES[0].fog, FOG_NEAR, FOG_FAR);
-  scene.background = new THREE.Color(PALETTES[0].fog);
+  scene.fog = new THREE.Fog(palettes[0].fog, FOG_NEAR, FOG_FAR);
+  scene.background = new THREE.Color(palettes[0].fog);
 
   camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 100);
   camera.position.set(0, 2, 8);
@@ -48,7 +62,7 @@ export function initScene() {
   const ambient = new THREE.AmbientLight(0x0c0a12, 0.42);
   scene.add(ambient);
 
-  const point = new THREE.PointLight(PALETTES[0].accent, 1.35, 32);
+  const point = new THREE.PointLight(palettes[0].accent, 1.35, 32);
   point.position.set(2, 6, 4);
   scene.add(point);
 
@@ -126,7 +140,7 @@ function buildRain() {
 
   rainMat = new THREE.PointsMaterial({
     map: makeRainDropTexture(),
-    color: 0x9b70e8,
+    color: palettes[0].accent,
     // World-units height of the streak; width follows 1:10 texture aspect
     size: 0.55,
     transparent: true,
@@ -177,15 +191,19 @@ function lerpSceneColors() {
   if (point) {
     point.color.lerp(targetAccent, 0.02);
   }
+
+  if (rainMat) {
+    rainMat.color.lerp(targetAccent, 0.02);
+  }
 }
 
 function onMemorySelect(e) {
-  const idx = PALETTES.length > 0
-    ? (paletteIndex + 1) % PALETTES.length
+  const idx = palettes.length > 0
+    ? (paletteIndex + 1) % palettes.length
     : 0;
   paletteIndex = idx;
-  targetFogColor = new THREE.Color(PALETTES[idx].fog);
-  targetAccent = new THREE.Color(PALETTES[idx].accent);
+  targetFogColor = new THREE.Color(palettes[idx].fog);
+  targetAccent = new THREE.Color(palettes[idx].accent);
 }
 
 function onResize() {

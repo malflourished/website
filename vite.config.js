@@ -25,6 +25,7 @@ export default defineConfig(({ command }) => ({
         interactive: resolve(__dirname, 'interactive.html'),
         blog: resolve(__dirname, 'blog.html'),
         about: resolve(__dirname, 'about.html'),
+        testMalf: resolve(__dirname, 'test-malf.html'),
       },
     },
   },
