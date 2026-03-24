@@ -28,9 +28,41 @@ function videoMimeType(url) {
   return 'video/mp4';
 }
 
-/** Top hero: optional `video` URL, else `image`, else placeholder (see experience.json). */
+function vimeoEmbedSrc(videoId) {
+  const id = String(videoId).replace(/[^\d]/g, '');
+  if (!id) return '';
+  const q = new URLSearchParams({
+    badge: '0',
+    autopause: '0',
+    player_id: '0',
+    app_id: '58479',
+    autoplay: '1',
+  });
+  return `https://player.vimeo.com/video/${id}?${q}`;
+}
+
+/** Top hero: optional Vimeo id, else `video` URL, else `image`, else placeholder (see experience.json). */
 function renderHeroMedia(entry) {
   const ariaLabel = escapeAttr(`${entry.role} — project media`);
+
+  if (entry.vimeo) {
+    const src = vimeoEmbedSrc(entry.vimeo);
+    if (src) {
+      const title = escapeAttr(entry.vimeoTitle || 'Vimeo video');
+      return `
+      <div class="inspector__hero-frame inspector__hero-frame--embed">
+        <iframe
+          class="inspector__embed"
+          src="${escapeAttr(src)}"
+          allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          title="${title}"
+          aria-label="${ariaLabel}"
+        ></iframe>
+      </div>
+    `;
+    }
+  }
 
   if (entry.video) {
     const poster = entry.videoPoster
@@ -81,6 +113,61 @@ function emitSelectionChange(entry) {
   );
 }
 
+/** Pixels for one wheel tick when deltaMode is DOM_DELTA_LINE. */
+const WHEEL_LINE_PX = 16;
+
+function wheelDeltaYpx(e) {
+  const y = e.deltaY;
+  switch (e.deltaMode) {
+    case 1:
+      return y * WHEEL_LINE_PX;
+    case 2: {
+      const h = e.currentTarget?.clientHeight ?? 0;
+      return y * (h || window.innerHeight);
+    }
+    default:
+      return y;
+  }
+}
+
+/**
+ * Wheel anywhere on the inspector (hero, meta, title, etc.) scrolls the body column,
+ * same as wheeling directly over `.inspector__body-scroll`. Iframes receive their own
+ * wheel events and are unaffected.
+ */
+function initInspectorScrollProxy() {
+  if (!inspectorEl) return;
+
+  inspectorEl.addEventListener(
+    'wheel',
+    (e) => {
+      const scrollEl = inspectorEl.querySelector('.inspector__body-scroll');
+      if (!scrollEl) return;
+
+      const t = e.target;
+      if (t instanceof Node && scrollEl.contains(t)) return;
+
+      const max = scrollEl.scrollHeight - scrollEl.clientHeight;
+      if (max <= 0) return;
+
+      e.preventDefault();
+      const dy = wheelDeltaYpx(e);
+      scrollEl.scrollTop = Math.min(
+        max,
+        Math.max(0, scrollEl.scrollTop + dy),
+      );
+    },
+    { passive: false },
+  );
+}
+
+function timelineProductionLine(entry) {
+  const p = entry.production?.trim();
+  return p
+    ? `<span class="timeline-node__production">${escapeHtml(p)}</span>`
+    : '';
+}
+
 function renderTimeline() {
   experience.forEach((entry) => {
     const node = document.createElement('button');
@@ -89,11 +176,10 @@ function renderTimeline() {
     node.setAttribute('aria-selected', 'false');
     node.dataset.id = entry.id;
 
-    const studioLine = escapeHtml(entry.studio ?? entry.company);
-
     node.innerHTML = `
       <span class="timeline-node__period">${escapeHtml(entry.period)}</span>
-      <span class="timeline-node__studio">${studioLine}</span>
+      <span class="timeline-node__company">${escapeHtml(entry.company)}</span>
+      ${timelineProductionLine(entry)}
       <span class="timeline-node__title">${escapeHtml(entry.role)}</span>
     `;
 
@@ -121,8 +207,30 @@ function selectEntry(id) {
   emitSelectionChange(entry);
 }
 
+function inspectorProductionBlock(entry) {
+  const p = entry.production?.trim();
+  return p
+    ? `<p class="inspector__production">${escapeHtml(p)}</p>`
+    : '';
+}
+
+const INSPECTOR_THUMB_PLACEHOLDER_COUNT = 5;
+
+function renderImagePlaceholders() {
+  const cells = Array.from({ length: INSPECTOR_THUMB_PLACEHOLDER_COUNT }, () => '<span class="inspector__thumb-placeholder"></span>').join('');
+  return `
+    <div class="inspector__thumb-row" aria-hidden="true">
+      ${cells}
+    </div>
+  `;
+}
+
 function renderInspector(entry) {
-  const studioLine = escapeHtml(entry.studio ?? entry.company);
+  const tagsBlock = entry.tags?.length
+    ? `<div class="inspector__tags">
+        ${entry.tags.map((t) => `<span class="inspector__tag">${escapeHtml(t)}</span>`).join('')}
+       </div>`
+    : '';
 
   inspectorEl.innerHTML = `
     <div class="inspector__content">
@@ -132,17 +240,18 @@ function renderInspector(entry) {
       <div class="inspector__text-stack phosphor-bloom--full">
         <div class="inspector__meta">
           <p class="inspector__period">${escapeHtml(entry.period)}</p>
-          <p class="inspector__studio">${studioLine}</p>
+          <p class="inspector__company">${escapeHtml(entry.company)}</p>
+          ${inspectorProductionBlock(entry)}
+          ${entry.location?.trim()
+            ? `<p class="inspector__location">${escapeHtml(entry.location.trim())}</p>`
+            : ''}
         </div>
         <h2 class="inspector__title">${escapeHtml(entry.role)}</h2>
         <div class="inspector__divider" aria-hidden="true"></div>
         <div class="inspector__body-scroll">
           <p class="inspector__body">${formatBody(entry.body)}</p>
-          ${entry.tags?.length
-            ? `<div class="inspector__tags">
-                ${entry.tags.map((t) => `<span class="inspector__tag">${escapeHtml(t)}</span>`).join('')}
-               </div>`
-            : ''}
+          ${renderImagePlaceholders()}
+          ${tagsBlock}
         </div>
       </div>
     </div>
@@ -157,5 +266,6 @@ function restoreFromHash() {
 }
 
 export function initTimeline() {
+  initInspectorScrollProxy();
   renderTimeline();
 }

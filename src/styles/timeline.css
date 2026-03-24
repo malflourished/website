@@ -68,7 +68,8 @@
 
 /* Child text — block + full width keeps every row left-aligned */
 .timeline-node__period,
-.timeline-node__studio,
+.timeline-node__company,
+.timeline-node__production,
 .timeline-node__title {
   display: block;
   width: 100%;
@@ -83,10 +84,17 @@
   color: var(--accent);
 }
 
-.timeline-node__studio {
-  font-size: 0.78rem;
+.timeline-node__company {
+  font-size: 0.82rem;
   line-height: 1.35;
+  font-weight: 600;
   color: var(--text);
+}
+
+.timeline-node__production {
+  font-size: 0.72rem;
+  line-height: 1.35;
+  color: var(--text-dim);
 }
 
 .timeline-node__title {

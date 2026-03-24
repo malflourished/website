@@ -14,9 +14,9 @@ const BLOOM_K3 = 1;
 
 /**
  * Media (img / video / hero frame) uses this fraction of the base blur + add.
- * Global knob: 0.5 ≈ half; raise toward 1 to match UI text.
+ * 0.1 ≈ 10% of the UI text bloom; raise toward 1 to match text.
  */
-const MEDIA_BLOOM_FACTOR = 0.5;
+const MEDIA_BLOOM_FACTOR = 0.1;
 
 function appendBloomFilter(defs, id, soft, wide, k3) {
   const svgNS = 'http://www.w3.org/2000/svg';

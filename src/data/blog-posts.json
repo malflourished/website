@@ -4,13 +4,13 @@
     "title": "Hello, world",
     "date": "2026-03-23",
     "excerpt": "A tiny placeholder post while the blog takes shape.",
-    "body": "This is a static blog powered by a JSON file and a small script. Each entry has an id, title, date, optional excerpt, and body text.\n\nParagraphs are separated by blank lines. Swap this copy for something real whenever you like."
+    "bodyHtml": "<p>This is a static blog powered by Markdown in <code>content/blog/</code> and a small build script. Each file has YAML frontmatter (<code>title</code>, <code>date</code>, optional <code>id</code>, <code>excerpt</code>) and a Markdown body.</p>\n<p>Point Obsidian at this folder via a symlink into the repo (see project notes), then run <code>npm run build</code> (or <code>npm run dev</code>) to regenerate <code>src/data/blog-posts.json</code>.</p>\n"
   },
   {
     "id": "process-notes",
     "title": "Process notes",
     "date": "2026-03-20",
     "excerpt": "Short notes on how work actually gets done.",
-    "body": "Another sample post. Use the same pattern in blog-posts.json: add an object, keep ids unique, and use the date field for sorting (newest first in the list).\n\nLink to a post with blog.html#process-notes."
+    "bodyHtml": "<p>Another sample post. Add a new <code>.md</code> file under <code>content/blog/</code>, keep <code>id</code> values unique, and use <code>date</code> for sorting (newest first on the list).</p>\n<p>Link to a post with <a href=\"blog.html#process-notes\">blog.html#process-notes</a>.</p>\n"
   }
 ]

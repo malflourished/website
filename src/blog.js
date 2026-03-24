@@ -40,6 +40,13 @@ function bodyToParagraphs(body) {
     .join('');
 }
 
+/** Build step writes trusted HTML from repo Markdown; legacy posts may use plain `body`. */
+function renderArticleBody(post) {
+  if (post.bodyHtml) return post.bodyHtml;
+  if (post.body) return bodyToParagraphs(post.body);
+  return '';
+}
+
 function sortedPosts() {
   return [...posts].sort(
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
@@ -81,7 +88,7 @@ function renderPost(id) {
         <p class="blog-article__meta">${escapeHtml(formatDate(post.date))}</p>
         <h2 class="blog-article__title" id="blog-article-title">${escapeHtml(post.title)}</h2>
       </header>
-      <div class="blog-article__body">${bodyToParagraphs(post.body)}</div>
+      <div class="blog-article__body blog-article__body--md">${renderArticleBody(post)}</div>
     </article>
   `;
   document.title = `${post.title} — Blog — malflourished`;

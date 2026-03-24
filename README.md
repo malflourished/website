@@ -64,24 +64,25 @@ Work experience lives in `src/data/experience.json`. Content is **manually synce
 
 ```json
 {
-  "id":      "acme-senior-engineer",
-  "period":  "2021 – 2023",
-  "studio":  "Acme Corp · Industry · City, ST",
-  "company": "Acme Corp",
-  "role":    "Senior Engineer",
-  "body":    "Description of the role...",
-  "tags":    ["Python", "AWS", "Leadership"]
+  "id":         "acme-senior-engineer",
+  "period":     "2021 – 2023",
+  "company":    "Acme Corp",
+  "production": "Show or campaign name (omit or leave off if not applicable)",
+  "location":   "City, ST",
+  "role":       "Senior Engineer",
+  "body":       "Description of the role...",
+  "tags":       ["Python", "AWS", "Leadership"]
 }
 ```
 
-`studio` appears on the timeline spine (above the role) and in the detail panel. If omitted, `company` is used instead.
+**Timeline** lists period, company, optional production, then role. **Detail panel** order: hero media, period, company, production (if set), location, role, description, five image placeholders, tags.
 
-Detail column is **video-first** (see mockup): hero media on top, then period / studio, title, rule, body, tags.
-
+- **`production`** (optional): show, film, campaign, or season title. Omitted when there is no single production name (e.g. some staff roles).
+- **`vimeo` / `vimeoTitle`** (optional): numeric Vimeo video id and iframe title for the hero.
 - **`video`** (optional): direct file URL (e.g. `.mp4`, `.webm`). Renders a **16:9** player above the copy.
 - **`videoPoster`** (optional): poster image URL for the `<video>` element.
-- **`image`** (optional): if there is no `video`, a still is shown in the same hero frame (**object-fit: cover**).
-- If neither is set, a **placeholder** block appears until you add media.
+- **`image`** (optional): if there is no Vimeo or file `video`, a still is shown in the same hero frame (**object-fit: cover**).
+- If none of the above are set, a **placeholder** block appears until you add media.
 
 ## Blog
 
@@ -99,7 +100,7 @@ The Blog page (`blog.html`) loads **`src/blog.js`**, which lists posts newest-fi
 
 ## Tuning the mood
 
-- **Phosphor bloom**: base blur/add amounts and **media vs UI** strength live in `src/globalPhosphor.js` (`BLOOM_*`, `MEDIA_BLOOM_FACTOR`). UI uses class `phosphor-bloom--full`; images/video/hero use `phosphor-bloom--media` (half strength by default).
+- **Phosphor bloom**: base blur/add amounts and **media vs UI** strength live in `src/globalPhosphor.js` (`BLOOM_*`, `MEDIA_BLOOM_FACTOR`). UI uses class `phosphor-bloom--full`; images/video/hero use `phosphor-bloom--media` (~10% of text bloom by default).
 - **Site accent (orange / amber)**: edit **`--accent`** in `src/styles/theme.css` only. CSS uses `color-mix()` for dim/glow/hover; canvas/WebGL read the same variable via `src/theme/accent.js`.
 - **Other colors / type**: remaining variables in `src/styles/theme.css`.
 - **Optional 3D backdrop**: `src/scene/memorySkyline.js` (not wired on Work; re-hook from `main.js` if needed).

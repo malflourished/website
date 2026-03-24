@@ -2,8 +2,8 @@
   {
     "id": "credit-karma-senior-motion",
     "period": "Oct 2018 – Present",
-    "studio": "Credit Karma · FinTech · Oakland & San Francisco, CA",
     "company": "Credit Karma",
+    "location": "Oakland & San Francisco, CA",
     "role": "Senior Motion Designer",
     "body": "Senior Motion Designer II — Mar 2021 – Present · Oakland, California, United States\n\nSenior Motion Designer I — Oct 2018 – Feb 2021 · San Francisco, California\n\nFull-time · 7 yrs 6 mos (company tenure)\n\nResponsible for establishing our motion design guidelines. These guidelines were created to aide our internal and external partners in keeping our tone of voice consistent throughout marketing.\n\nThru lots of experimentation, iteration, and embracing our philosophy of making financial progress for all, we've landed on a motion style that feels fun, sophisticated & relatable, to compliment the modern collage aesthetic that makes our brand recognizable.\n\nResponsible for the design and implementation of motion into our marketing, email and social media campaigns.",
     "tags": ["Motion design", "Brand", "Marketing"]
@@ -11,26 +11,29 @@
   {
     "id": "chiodo-bros-animator",
     "period": "Aug 2018 · 1 mo",
-    "studio": "Chiodo Bros Productions · Stop-motion · Los Angeles, CA · On-site",
-    "company": "Chiodo Bros Productions Inc · Freelance",
-    "role": "Animator",
-    "body": "Los Angeles Metropolitan Area · On-site\n\nGot to join the stop-motion legends at Chiodo Bros. for a brief but memorable stint contributing R&D animation to the early development of Marcel the Shell with Shoes On. Performed exploratory test animations helping to shape the character's movement and visual identity. A short-lived engagement, but an invaluable experience working alongside true industry veterans.",
+    "company": "Chiodo Bros Productions",
+    "production": "Marcel the Shell with Shoes On (early development)",
+    "location": "Los Angeles, CA",
+    "role": "Character Animator",
+    "body": "On-site · Los Angeles Metropolitan Area\n\nGot to join the stop-motion legends at Chiodo Bros. for a brief but memorable stint contributing R&D animation to the early development of Marcel the Shell with Shoes On. Performed exploratory test animations helping to shape the character's movement and visual identity. A short-lived engagement, but an invaluable experience working alongside true industry veterans.",
     "tags": ["Stop motion", "Freelance", "Film"]
   },
   {
     "id": "stoopid-buddy-animator",
     "period": "Jun 2018 · 1 mo",
-    "studio": "Stoopid Buddy Stoodios · Stop-motion · Burbank, CA",
     "company": "Stoopid Buddy Stoodios",
-    "role": "Animator",
+    "production": "WWE web series",
+    "location": "Burbank, CA",
+    "role": "Character Animator",
     "body": "Character animator on a web series for WWE.",
     "tags": ["Character animation", "Web series"]
   },
   {
     "id": "bix-pix-tumble-leaf-s4",
     "period": "May 2017 – Feb 2018 · 10 mos",
-    "studio": "Bix Pix Entertainment · Stop-motion · Sun Valley, CA",
     "company": "Bix Pix Entertainment",
+    "production": "Tumble Leaf — season 4",
+    "location": "Sun Valley, CA",
     "role": "Character Animator",
     "body": "Character animator on Season 4 of Amazon’s Tumble Leaf.",
     "tags": ["Stop motion", "Streaming", "Series"]
@@ -38,8 +41,9 @@
   {
     "id": "whalerock-animation-lead",
     "period": "Feb 2017 – Apr 2017 · 3 mos",
-    "studio": "Whalerock Industries · Stop-Motion · West Hollywood, CA",
     "company": "Whalerock Industries",
+    "production": "Nuts + Bolts (Viceland)",
+    "location": "West Hollywood, CA",
     "role": "Animation Lead",
     "body": "Animation lead for the stop motion episode of Nuts + Bolt's on Viceland. I was responsible for all character animation during the Henry Selick interview and short film segment.",
     "tags": ["Stop motion", "TV", "Lead"]
@@ -47,8 +51,9 @@
   {
     "id": "starburns-lego-batman",
     "period": "Feb 2017 · 1 mo",
-    "studio": "Starburns Industries · Stop-Motion · Burbank, CA",
     "company": "Starburns Industries",
+    "production": "The Lego Batman Movie (promotional spots)",
+    "location": "Burbank, CA",
     "role": "Animator",
     "body": "Animated promotional spots for The Lego Batman Movie.",
     "tags": ["Animation", "Film"]
@@ -56,8 +61,9 @@
   {
     "id": "bix-pix-tumble-leaf-s3",
     "period": "Jul 2016 – Jan 2017 · 7 mos",
-    "studio": "Bix Pix Entertainment · Stop-Motion · Sun Valley, CA",
     "company": "Bix Pix Entertainment",
+    "production": "Tumble Leaf — season 3",
+    "location": "Sun Valley, CA",
     "role": "Character Animator",
     "body": "Character animator on season 3 of Amazon's Tumble Leaf.",
     "tags": ["Stop motion", "Streaming", "Series"]
@@ -65,17 +71,19 @@
   {
     "id": "extra-credit-doctor-havok",
     "period": "Apr 2016 – Jun 2016 · 3 mos",
-    "studio": "Extra Credit Studios · Stop-Motion · Culver City, CA",
     "company": "Extra Credit Studios",
+    "production": "Doctor Havok",
+    "location": "Culver City, CA",
     "role": "Character Animator",
-    "body": "Culver City, California\n\nAnimated on the web series \"Doctor Havok,\" for Full Screen streaming service.",
+    "body": "Animated on the web series \"Doctor Havok,\" for Full Screen streaming service.",
     "tags": ["Web series", "Streaming"]
   },
   {
     "id": "bix-pix-tumble-leaf-s2",
     "period": "May 2015 – Feb 2016 · 10 mos",
-    "studio": "Bix Pix Entertainment · Stop-motion · Sun Valley, CA",
     "company": "Bix Pix Entertainment",
+    "production": "Tumble Leaf — season 2",
+    "location": "Sun Valley, CA",
     "role": "Character Animator",
     "body": "Character animator on season 2 of Amazon's Tumble Leaf.",
     "tags": ["Stop motion", "Streaming", "Series"]
@@ -83,8 +91,9 @@
   {
     "id": "shadowmachine-party-story",
     "period": "Jul 2015 – Oct 2015 · 4 mos",
-    "studio": "ShadowMachine · Stop-motion · Los Angeles, CA",
     "company": "ShadowMachine",
+    "production": "Greatest Party Story Ever",
+    "location": "Los Angeles, CA",
     "role": "Segment Co-Director",
     "body": "Co-directed, designed, and animated segments for \"Greatest Party Story Ever\" TV series on MTV.",
     "tags": ["Direction", "TV", "MTV"]
@@ -92,8 +101,9 @@
   {
     "id": "wondros-timeless-mcdonalds",
     "period": "Jul 2015 · 1 mo",
-    "studio": "Wondros · Commercial & branded content · Los Angeles, CA",
     "company": "Wondros",
+    "production": "Timeless (McDonald's)",
+    "location": "Los Angeles, CA",
     "role": "Animation Director",
     "body": "Animation Director on \"Timeless,\" a stop motion commercial project for McDonalds. Responsible for all aspects of the animation process.",
     "tags": ["Commercial", "Stop motion", "Director"]
@@ -101,8 +111,9 @@
   {
     "id": "buzzfeed-newmans-own",
     "period": "Feb 2015 – Mar 2015 · 2 mos",
-    "studio": "BuzzFeed · Stop-Motion · Los Angeles, CA",
     "company": "BuzzFeed",
+    "production": "Newman's Own commercial",
+    "location": "Los Angeles, CA",
     "role": "Animation Director",
     "body": "Animation Director on a commercial project for Newman's Own. Responsible for creating and supervising all aspects of the animation process.",
     "tags": ["Commercial", "Director"]
@@ -110,35 +121,39 @@
   {
     "id": "screen-novelties-elf",
     "period": "Jun 2014 – Sep 2014 · 4 mos",
-    "studio": "Screen Novelties · Stop-motion · Highland Park, CA",
     "company": "Screen Novelties",
+    "production": "Elf: Buddy's Musical Christmas",
+    "location": "Highland Park, CA",
     "role": "Character Animator",
-    "body": "Highland Park, California\n\nCharacter animator on NBC's Elf: Buddy's Musical Christmas.",
+    "body": "Character animator on NBC's Elf: Buddy's Musical Christmas.",
     "tags": ["TV special", "NBC"]
   },
   {
     "id": "bix-pix-tumbleaf-s1",
     "period": "Nov 2013 – May 2014 · 7 mos",
-    "studio": "Bix Pix Entertainment · Stop-Motion · Sun Valley, CA",
     "company": "Bix Pix Entertainment",
+    "production": "Tumbleaf — season 1",
+    "location": "Sun Valley, CA",
     "role": "Character Animator",
-    "body": "Sun Valley, California\n\nCharacter animator on Amazon's web series \"Tumbleaf.\"",
+    "body": "Character animator on Amazon's web series \"Tumbleaf.\"",
     "tags": ["Stop motion", "Amazon", "Web series"]
   },
   {
     "id": "starburns-anomalisa",
     "period": "May 2013 – Nov 2013 · 7 mos",
-    "studio": "Starburns Industries · Stop-Motion · Burbank, CA",
     "company": "Starburns Industries",
+    "production": "Anomalisa",
+    "location": "Burbank, CA",
     "role": "Character Animator",
-    "body": "Burbank, CA\n\nCharacter animator on Charlie Kaufman's animated feature film \"Anomalisa.\"",
+    "body": "Character animator on Charlie Kaufman's animated feature film \"Anomalisa.\"",
     "tags": ["Feature film", "Stop motion"]
   },
   {
     "id": "google-android-studio-g",
     "period": "Dec 2012 · 1 mo",
-    "studio": "Google · Stop-Motion · Mountain View, CA",
     "company": "Google",
+    "production": "Android / Studio G",
+    "location": "Mountain View, CA",
     "role": "Animation Director",
     "body": "Supervised and animated an Android project for Studio G. I was responsible for all aspects of animation.",
     "tags": ["Google", "Commercial"]
@@ -146,37 +161,43 @@
   {
     "id": "shadowmachine-hell-and-back",
     "period": "Feb 2012 – Oct 2012 · 9 mos",
-    "studio": "ShadowMachine · Stop-motion · Los Angeles, CA",
     "company": "ShadowMachine",
+    "production": "Hell and Back",
+    "location": "Los Angeles, CA",
     "role": "Character Animator",
-    "body": "Los Angeles Metropolitan Area\n\nCharacter animator on the feature film \"Hell and Back.\"",
+    "body": "Character animator on the feature film \"Hell and Back.\"",
     "tags": ["Feature film"]
   },
   {
     "id": "google-doodle",
     "period": "Feb 2012 · 1 mo",
-    "studio": "Doodle team · Stop-Motion · Mountain View, CA",
     "company": "Google",
+    "production": "Google Doodle",
+    "location": "Mountain View, CA",
     "role": "Lead Animator",
-    "body": "Mountain View, CA\n\nAnimator for a Google Doodle project. Responsible for all stop motion animation, and model rigs.",
+    "body": "Animator for a Google Doodle project. Responsible for all stop motion animation, and model rigs.",
     "tags": ["Google", "Stop motion", "Doodle"]
   },
   {
     "id": "ryactive-duck-tron",
     "period": "Jul 2011 · 1 mo",
-    "studio": "Ryactive Corporation · Stop-Motion · Oakland Hills, CA",
     "company": "Ryactive Corporation",
+    "production": "Duck Tron",
+    "location": "Oakland Hills, CA",
     "role": "Animation Director",
-    "body": "Oakland Hills, CA\n\nResponsible for all stop motion content on the commercial \"Duck Tron.\"",
+    "body": "Responsible for all stop motion content on the commercial \"Duck Tron.\"",
     "tags": ["Commercial", "Stop motion"]
   },
   {
     "id": "fabricated-films-trompe-loeil",
     "period": "Jan 2009 – Nov 2010 · 1 yr 11 mos",
-    "studio": "Fabricated Films · Independent / thesis film · San Francisco, CA",
-    "company": "Fabricated Films · Self-employed",
+    "company": "Fabricated Films",
+    "production": "Trompe L'oeil",
+    "location": "San Francisco, CA",
     "role": "Director",
-    "body": "San Francisco, California, United States\n\nDirected, wrote, animated, designed, etc. Trompe L'Oeil, my thesis film at the Academy of Art University.",
+    "vimeo": "17536753",
+    "vimeoTitle": "Trompe L'oeil",
+    "body": "Thesis film at the Academy of Art University — directed, wrote, animated, and designed.",
     "tags": ["Film", "Thesis", "Director"]
   }
 ]

@@ -17,7 +17,7 @@
   filter: url(#malf-phosphor-bloom);
 }
 
-/* Images, video, hero frames — softer bloom (factor in globalPhosphor.js) */
+/* Images, video, hero frames — light bloom (~10% of UI; factor in globalPhosphor.js) */
 .phosphor-bloom--media {
   filter: url(#malf-phosphor-bloom-media);
 }

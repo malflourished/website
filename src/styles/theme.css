@@ -25,6 +25,9 @@
   --gap:         2rem;
   --radius:      2px;
 
+  /* Fade length at top/bottom of scroll clips (mask gradient) */
+  --scroll-feather: 6px;
+
   /* Type — system monospace stack (same family as landing CRT) */
   --font-ui:      ui-monospace, 'Cascadia Code', 'SF Mono', Menlo, Monaco, monospace;
   --font-display: ui-monospace, 'Cascadia Code', 'SF Mono', Menlo, Monaco, monospace;
@@ -81,6 +84,31 @@ button {
   border: none;
   background: none;
   color: inherit;
+}
+
+/* ── Scroll regions: soft vertical feather on clip edges ─── */
+
+.timeline-container .timeline,
+.inspector__body-scroll,
+body.page-simple .phosphor-root {
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0,
+    #000 var(--scroll-feather),
+    #000 calc(100% - var(--scroll-feather)),
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0,
+    #000 var(--scroll-feather),
+    #000 calc(100% - var(--scroll-feather)),
+    transparent 100%
+  );
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
 }
 
 /* ── Scrollbar ──────────────────────────────────────────── */

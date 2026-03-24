@@ -115,3 +115,80 @@
 .blog-article__body p:last-child {
   margin-bottom: 0;
 }
+
+/* Markdown output from build step */
+.blog-article__body--md h2,
+.blog-article__body--md h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1.2;
+  margin: 1.5rem 0 0.65rem;
+}
+
+.blog-article__body--md h2:first-child,
+.blog-article__body--md h3:first-child {
+  margin-top: 0;
+}
+
+.blog-article__body--md h2 {
+  font-size: 1.15rem;
+}
+
+.blog-article__body--md h3 {
+  font-size: 1.02rem;
+}
+
+.blog-article__body--md ul,
+.blog-article__body--md ol {
+  margin: 0 0 1rem;
+  padding-left: 1.25rem;
+}
+
+.blog-article__body--md li {
+  margin-bottom: 0.35rem;
+}
+
+.blog-article__body--md a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+.blog-article__body--md a:hover {
+  color: var(--accent-hover);
+}
+
+.blog-article__body--md code {
+  font-family: var(--font-mono);
+  font-size: 0.88em;
+  color: var(--text-bright);
+  background: var(--surface-alt);
+  padding: 0.12em 0.35em;
+  border-radius: var(--radius);
+}
+
+.blog-article__body--md pre {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  line-height: 1.5;
+  margin: 0 0 1rem;
+  padding: 0.85rem 1rem;
+  overflow-x: auto;
+  background: var(--surface-alt);
+  border-radius: var(--radius);
+  border: 1px solid var(--accent-dim);
+}
+
+.blog-article__body--md pre code {
+  padding: 0;
+  background: none;
+  font-size: inherit;
+}
+
+.blog-article__body--md blockquote {
+  margin: 0 0 1rem;
+  padding-left: 1rem;
+  border-left: 2px solid var(--accent-dim);
+  color: var(--text-dim);
+}
