@@ -49,7 +49,6 @@
 }
 
 .inspector__text-stack .inspector__meta,
-.inspector__text-stack .inspector__title,
 .inspector__text-stack .inspector__divider {
   flex-shrink: 0;
 }
@@ -136,7 +135,7 @@
 .inspector__meta {
   width: 100%;
   min-width: 0;
-  margin-bottom: 1rem;
+  margin-bottom: 0.35rem;
 }
 
 .inspector__period {
@@ -145,41 +144,29 @@
   letter-spacing: 0.25em;
   text-transform: uppercase;
   color: var(--accent);
-  margin: 0 0 0.45rem;
-}
-
-.inspector__company {
-  font-size: 0.95rem;
-  line-height: 1.4;
-  font-weight: 600;
-  color: var(--text);
   margin: 0 0 0.35rem;
-  min-width: 0;
 }
 
-.inspector__production {
-  font-size: 0.88rem;
-  line-height: 1.45;
-  color: var(--text);
-  margin: 0 0 0.35rem;
-  min-width: 0;
-}
-
-.inspector__location {
-  font-size: 0.8rem;
-  line-height: 1.4;
-  color: var(--text-dim);
-  margin: 0;
-  min-width: 0;
-}
-
-.inspector__title {
+/* Company · project · location — one line (wraps); middle dots from markup */
+.inspector__context {
   font-family: var(--font-display);
-  font-size: clamp(1.65rem, 3.2vw, 2.65rem);
+  font-size: 0.9rem;
+  line-height: 1.4;
+  font-weight: 500;
+  color: var(--text);
+  margin: 0 0 0.3rem;
+  min-width: 0;
+}
+
+/* Role — same type size as context line, accent color */
+.inspector__role {
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  line-height: 1.4;
   font-weight: 700;
   color: var(--accent);
-  line-height: 1.08;
-  margin: 0 0 1rem;
+  margin: 0 0 0.55rem;
+  min-width: 0;
 }
 
 .inspector__divider {

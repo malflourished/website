@@ -207,11 +207,15 @@ function selectEntry(id) {
   emitSelectionChange(entry);
 }
 
-function inspectorProductionBlock(entry) {
-  const p = entry.production?.trim();
-  return p
-    ? `<p class="inspector__production">${escapeHtml(p)}</p>`
-    : '';
+/** Company · production · location on one line (middle dots). */
+function inspectorContextLine(entry) {
+  const parts = [
+    entry.company?.trim(),
+    entry.production?.trim(),
+    entry.location?.trim(),
+  ].filter(Boolean);
+  if (!parts.length) return '';
+  return `<p class="inspector__context">${parts.map(escapeHtml).join(' · ')}</p>`;
 }
 
 const INSPECTOR_THUMB_PLACEHOLDER_COUNT = 5;
@@ -240,13 +244,9 @@ function renderInspector(entry) {
       <div class="inspector__text-stack phosphor-bloom--full">
         <div class="inspector__meta">
           <p class="inspector__period">${escapeHtml(entry.period)}</p>
-          <p class="inspector__company">${escapeHtml(entry.company)}</p>
-          ${inspectorProductionBlock(entry)}
-          ${entry.location?.trim()
-            ? `<p class="inspector__location">${escapeHtml(entry.location.trim())}</p>`
-            : ''}
+          ${inspectorContextLine(entry)}
+          <h2 class="inspector__role">${escapeHtml(entry.role)}</h2>
         </div>
-        <h2 class="inspector__title">${escapeHtml(entry.role)}</h2>
         <div class="inspector__divider" aria-hidden="true"></div>
         <div class="inspector__body-scroll">
           <p class="inspector__body">${formatBody(entry.body)}</p>

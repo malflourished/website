@@ -75,7 +75,7 @@ Work experience lives in `src/data/experience.json`. Content is **manually synce
 }
 ```
 
-**Timeline** lists period, company, optional production, then role. **Detail panel** order: hero media, period, company, production (if set), location, role, description, five image placeholders, tags.
+**Timeline** lists period, company, optional production, then role. **Detail panel** order: hero media, period, one line `company · production · location`, role (accent, same size as that line), description, five image placeholders, tags.
 
 - **`production`** (optional): show, film, campaign, or season title. Omitted when there is no single production name (e.g. some staff roles).
 - **`vimeo` / `vimeoTitle`** (optional): numeric Vimeo video id and iframe title for the hero.
