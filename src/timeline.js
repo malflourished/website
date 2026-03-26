@@ -218,7 +218,7 @@ function inspectorContextLine(entry) {
   return `<p class="inspector__context">${parts.map(escapeHtml).join(' · ')}</p>`;
 }
 
-const INSPECTOR_THUMB_PLACEHOLDER_COUNT = 5;
+const INSPECTOR_THUMB_PLACEHOLDER_COUNT = 10;
 
 function renderImagePlaceholders() {
   const cells = Array.from({ length: INSPECTOR_THUMB_PLACEHOLDER_COUNT }, () => '<span class="inspector__thumb-placeholder"></span>').join('');
