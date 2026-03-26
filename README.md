@@ -43,7 +43,7 @@ src/
   main.js               App bootstrap (imports styles + modules)
   timeline.js           Data-driven timeline + inspector logic
   data/experience.json  Work experience — one entry per role
-  data/blog-posts.json Blog posts (see README → Blog)
+  data/blog-posts.json Compiled blog posts (from content/blog; see README → Blog)
   blog.js               Blog list + hash-routed post view
   scene/memorySkyline.js  Optional Three.js backdrop (unused on Work page)
   styles/
@@ -75,7 +75,7 @@ Work experience lives in `src/data/experience.json`. Content is **manually synce
 }
 ```
 
-**Timeline** lists period, company, optional production, then role. **Detail panel** order: hero media, period, one line `company · production · location`, role (accent, same size as that line), description, five image placeholders, tags.
+**Timeline** lists period, company, optional production, then role. **Detail panel** order: hero media, period, one line `company · production · location`, role (accent, same size as that line), description, ten image placeholders, tags.
 
 - **`production`** (optional): show, film, campaign, or season title. Omitted when there is no single production name (e.g. some staff roles).
 - **`vimeo` / `vimeoTitle`** (optional): numeric Vimeo video id and iframe title for the hero.
@@ -86,17 +86,21 @@ Work experience lives in `src/data/experience.json`. Content is **manually synce
 
 ## Blog
 
-Posts live in **`src/data/blog-posts.json`**. Each entry:
+**Authoring:** Write Markdown in **`content/blog/`** with YAML frontmatter (`title` and `date` required; `id` and `excerpt` optional). Set **`draft: true`** to keep a file in the folder but exclude it from the site. **`npm run dev`** and **`npm run build`** run **`scripts/build-blog.mjs`** first (see `predev` / `prebuild` in `package.json`), which writes **`src/data/blog-posts.json`** with HTML bodies and metadata.
+
+**Obsidian:** Keep canonical posts in the repo under `content/blog/`. In your vault, replace the export folder (e.g. `second-brain/05_LOG/web blog`) with a **symlink to** this repo’s `content/blog` so Obsidian saves into git. Do **not** make `content/blog` a symlink out to the vault—GitHub Actions only sees committed files inside the repository.
+
+Generated JSON entries include:
 
 | Field | Required | Notes |
 |-------|----------|--------|
-| `id` | yes | URL fragment, e.g. `welcome` → `blog.html#welcome` (keep unique) |
+| `id` | yes | From frontmatter or filename; e.g. `blog.html#welcome` |
 | `title` | yes | Headline |
-| `date` | yes | `YYYY-MM-DD` (used for display and sort) |
-| `excerpt` | no | Shown on the index list |
-| `body` | yes | Plain text; separate paragraphs with a blank line (`\n\n`) |
+| `date` | yes | `YYYY-MM-DD` (display and sort) |
+| `excerpt` | no | Index blurb |
+| `bodyHtml` | yes | Rendered Markdown |
 
-The Blog page (`blog.html`) loads **`src/blog.js`**, which lists posts newest-first and shows the full body when the hash matches a post id. No separate HTML per post.
+The Blog page (`blog.html`) loads **`src/blog.js`**, which lists posts newest-first and shows the full article when the hash matches a post `id`.
 
 ## Tuning the mood
 

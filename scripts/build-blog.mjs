@@ -49,6 +49,11 @@ function main() {
     const title = data.title;
     const date = data.date;
 
+    if (data.draft === true) {
+      console.warn(`build-blog: skipping ${file} (draft: true)`);
+      continue;
+    }
+
     if (!title || !date) {
       console.warn(`build-blog: skipping ${file} (missing title or date in frontmatter)`);
       continue;
